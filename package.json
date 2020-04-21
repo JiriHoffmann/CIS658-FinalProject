@@ -6,10 +6,17 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.19.2",
+    "firebase": "^7.14.1",
     "react": "^16.13.1",
+    "react-activity": "^1.2.2",
     "react-dom": "^16.13.1",
+    "react-form": "^4.0.1",
     "react-icons": "^3.9.0",
-    "react-scripts": "3.4.1"
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.1",
+    "react-select": "^3.1.0",
+    "uuid": "^7.0.3"
   },
   "scripts": {
     "start": "npm run watch:css && react-scripts start",
