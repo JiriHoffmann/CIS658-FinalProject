@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Dots } from "react-activity";
 import "react-activity/dist/react-activity.css";
 
@@ -14,6 +14,7 @@ const SmallButton = ({
   children,
   enClass,
   disClass,
+  dotsColor,
 }) => {
   return (
     <button
@@ -22,7 +23,7 @@ const SmallButton = ({
       className={disabled || loading ? disClass : enClass}
       type="button"
     >
-      {loading ? <Dots color="#fff" size={15} /> : children}
+      {loading ? <Dots color={dotsColor} size={15} /> : children}
     </button>
   );
 };
@@ -30,6 +31,7 @@ const SmallButton = ({
 SmallButton.defaultProps = {
   enClass: BUTTON_ENABLED,
   disClas: BUTTON_DISABLED,
+  dotsColor: "#fff",
 };
 
 export { SmallButton };

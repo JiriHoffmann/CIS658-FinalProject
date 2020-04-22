@@ -1,10 +1,11 @@
 import React from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 import {
+  About,
   Home,
   Feed,
-  Map,
   MyItems,
+  NewItem,
   User,
   Error,
   SignUp,
@@ -23,9 +24,10 @@ function App() {
           <NavBar />
           <Switch>
             <Route path="/" component={Home} exact />
+            <Route path="/about" component={About} exact />
             <Route path="/feed" component={Feed} />
-            <Route path="/map" component={Map} />
-            <Route path="/my_items" component={MyItems} />
+            <PrivateRoute path="/my_items" component={MyItems} />
+            <PrivateRoute path="/new_item" component={NewItem} />
             <PrivateRoute path="/user" component={User} />
             <LogedInRoute path="/signup" component={SignUp} />
             <LogedInRoute path="/login" component={LogIn} />

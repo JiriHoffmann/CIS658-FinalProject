@@ -16,7 +16,6 @@ const LogedInRoute = ({ component: Component, ...rest }) => {
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const { user } = useContext(AuthContext);
-  console.log(user)
   return (
     <Route
       {...rest}

@@ -1,23 +1,34 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Dots } from "react-activity";
 import "react-activity/dist/react-activity.css";
 
-const BUTTON_ENABLED =
-  "text-white font-bold py-2 px-4 rounded sm:w-48 bg-red-700 hover:bg-red-800 m-auto";
-const BUTTON_DISABLED =
-  "text-white font-bold py-2 px-4 rounded sm:w-1/2 bg-gray-700 m-auto cursor-not-allowed";
-
-const Button = ({ disabled, loading, onClick }) => {
+const Button = ({
+  disabled,
+  loading,
+  onClick,
+  children,
+  enClass,
+  disClass,
+  dotsColor,
+}) => {
   return (
     <button
       disabled={disabled || loading}
       onClick={onClick}
-      className={disabled || loading ? BUTTON_DISABLED : BUTTON_ENABLED}
+      className={disabled || loading ? disClass : enClass}
       type="button"
     >
-      {loading ? <Dots color="#fff" size={15} /> : "Send Recovery Email"}
+      {loading ? <Dots color={dotsColor} size={15} /> : children}
     </button>
   );
+};
+
+Button.defaultProps = {
+  enClass:
+    "text-white font-bold py-2 px-4 rounded sm:w-48 bg-red-700 hover:bg-red-800 m-auto",
+  disClass:
+    "text-white font-bold py-2 px-4 rounded sm:w-1/2 bg-gray-700 m-auto cursor-not-allowed",
+  dotsColor: "#fff",
 };
 
 export { Button };

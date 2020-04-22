@@ -10,24 +10,20 @@ const LogIn = ({ history }) => {
 
   const [enableButton, setEnableButton] = useState(false);
   useEffect(() => {
+    const validateForm = () => {
+      if (email === "" || password === "") {
+        return false;
+      }
+
+      if (!validateEmail(email)) {
+        return false;
+      }
+      return true;
+    };
     validateForm() ? setEnableButton(true) : setEnableButton(false);
   }, [email, password]);
 
-  const validateForm = () => {
-    if (email === "" || password === "") {
-      return false;
-    }
-
-    if (!validateEmail(email)) {
-      return false;
-    }
-    return true;
-  };
-
   const handleClick = () => {
-    if (!validateEmail(email)) {
-      return;
-    }
     try {
       firebase
         .auth()
@@ -42,7 +38,7 @@ const LogIn = ({ history }) => {
   };
 
   return (
-    <div className="w-full h-screen bg-gray-300 flex flex-col justify-center">
+    <div className="w-full h-screen bg-gray-400 flex flex-col justify-center">
       <div className="bg-white shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 flex flex-col max-w-lg max-h-64 mx-auto">
         <div className="font-bold text-2xl h-16 mx-auto">Log In</div>
         <form>
@@ -66,7 +62,12 @@ const LogIn = ({ history }) => {
           />
 
           <div className="flex items-center flex-col sm:flex-row">
-            <Button disabled={!enableButton} onClick={handleClick}>
+            <Button
+              disabled={!enableButton}
+              onClick={handleClick}
+              enClass="text-white font-bold py-2 px-4 rounded sm:w-48 bg-red-700 hover:bg-red-800 m-auto"
+              disClass="text-white font-bold py-2 px-4 rounded sm:w-1/2 bg-gray-700 m-auto cursor-not-allowed"
+            >
               Log In
             </Button>
             <Link

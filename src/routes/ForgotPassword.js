@@ -9,7 +9,7 @@ const ForgotPassword = () => {
 
   useEffect(() => {
     validateForm() ? setEnableButton(true) : setEnableButton(false);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [email]);
 
   const validateForm = () => {
@@ -32,10 +32,12 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="w-full h-screen bg-gray-300 flex flex-col justify-center">
+    <div className="w-full h-screen bg-gray-400 flex flex-col justify-center">
       <div className="bg-white shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 flex flex-col max-w-lg max-h-64 mx-6 sm:mx-auto">
         {showSent ? (
-          <Success />
+          <Success>
+            Recovery link was succesfully send. Check you email.
+          </Success>
         ) : (
           <>
             <div className="font-bold m-auto mb-6 text-center">
@@ -65,10 +67,10 @@ const ForgotPassword = () => {
             </form>
           </>
         )}
-         <div className="flex flex-col md:flex-row">
-            <div className="w-48"></div>
-            <div className="w-48"></div>
-          </div>
+        <div className="flex flex-col md:flex-row">
+          <div className="w-48"></div>
+          <div className="w-48"></div>
+        </div>
       </div>
     </div>
   );

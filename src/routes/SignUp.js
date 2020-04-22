@@ -15,26 +15,25 @@ const SignUp = ({ history }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    const validateForm = () => {
+      if (
+        username === "" ||
+        email === "" ||
+        password === "" ||
+        repeatPassword === ""
+      ) {
+        return false;
+      }
+      if (password !== repeatPassword) {
+        return false;
+      }
+      if (!validateEmail(email)) {
+        return false;
+      }
+      return true;
+    };
     validateForm() ? setEnableButton(true) : setEnableButton(false);
   }, [username, email, password, repeatPassword]);
-
-  const validateForm = () => {
-    if (
-      username === "" ||
-      email === "" ||
-      password === "" ||
-      repeatPassword === ""
-    ) {
-      return false;
-    }
-    if (password !== repeatPassword) {
-      return false;
-    }
-    if (!validateEmail(email)) {
-      return false;
-    }
-    return true;
-  };
 
   const handleClick = () => {
     if (!validateEmail(email)) {
@@ -62,7 +61,7 @@ const SignUp = ({ history }) => {
   }
 
   return (
-    <div className="w-full h-screen bg-gray-300 flex flex-col justify-center">
+    <div className="w-full h-screen bg-gray-400 flex flex-col justify-center">
       <div className="bg-white shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 flex flex-col max-w-lg max-h-64 mx-auto">
         <div className="font-bold text-2xl h-16 mx-auto">
           Create New Account

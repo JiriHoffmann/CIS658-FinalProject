@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { MdEdit } from "react-icons/md";
 import { Dots } from "react-activity";
 import "react-activity/dist/react-activity.css";
