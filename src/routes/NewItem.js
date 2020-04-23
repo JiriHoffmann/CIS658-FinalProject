@@ -54,6 +54,7 @@ const NewItem = ({ history }) => {
   const handleSubmit = () => {
     if (!PRICE_RE.test(originalPrice) || !PRICE_RE.test(newPrice)) {
       alert("Invalid price");
+      return;
     }
     setSubmitting(true);
     let picUUID = uuidv4();
@@ -107,9 +108,9 @@ const NewItem = ({ history }) => {
         user: user.displayName,
         userPictureURL: user.photoURL,
         userUID: user.uid,
-        timestamp: new Date(),
-        likedBy: ["0"],
-        dislikedBy: ["0"],
+        timestamp: Math.round(new Date() / 1000),
+        likedBy: [],
+        dislikedBy: [],
       })
       .then(() => {
         setSubmitting(false);

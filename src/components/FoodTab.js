@@ -10,6 +10,7 @@ import {
   MdAttachMoney,
   MdMoneyOff,
   MdAccessTime,
+  MdDelete,
 } from "react-icons/md";
 import {
   AiFillDislike,
@@ -18,13 +19,15 @@ import {
   AiOutlineLike,
 } from "react-icons/ai";
 import { Dots } from "react-activity";
+import { Button } from "./Button";
 
 const ICON_SIZE = "1.5rem";
 const LIKE_SIZE = "2rem";
 
-const FoodTab = ({ item }) => {
+const FoodTab = ({ item, allowDelete }) => {
   const { user } = useContext(AuthContext);
   const [disableRating, setDisableRating] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
 
@@ -120,9 +123,29 @@ const FoodTab = ({ item }) => {
     }
   };
 
+  const handleDelete = () => {
+    let check = window.confirm(`Are you sure you want to delete ${item.name}?`);
+    if (check === true) {
+      console.log(item.id);
+      setDeleteLoading(true);
+      firebase
+        .firestore()
+        .collection("items")
+        .doc(item.id)
+        .delete()
+        .catch((e) => {
+          alert("There was an issue deleting the item");
+          console.log(e);
+          setDeleteLoading(false);
+        });
+    } else {
+      console.log("canceled");
+    }
+  };
+
   const getTimeDifference = () => {
-    if (item.timestamp && item.timestamp.seconds) {
-      let difference = Math.round(new Date() / 1000) - item.timestamp.seconds;
+    if (item.timestamp) {
+      let difference = Math.round(new Date() / 1000) - item.timestamp;
       if (difference < 60 * 60) {
         return `${Math.ceil(difference / 60)} minutes ago`;
       } else if (difference < 60 * 60 * 24) {
@@ -132,7 +155,16 @@ const FoodTab = ({ item }) => {
   };
 
   return (
-    <div className=" w-3/4 sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4  max-w-64 rounded-lg owerflow-hidden bg-white shadow-lg mx-4 my-2 mt-2 xs:mx-8">
+    <div className=" w-3/4 sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4  max-w-64 rounded-lg owerflow-hidden bg-white shadow-lg mx-4 my-2 mt-2 xs:mx-8 relative">
+      {allowDelete ? (
+        <Button
+          loading={deleteLoading}
+          enClass="absolute top-0 right-0 mr-2 mt-2"
+          onClick={() => handleDelete()}
+        >
+          <MdDelete size="2rem" />
+        </Button>
+      ) : null}
       <LazyLoad
         once
         debounce={2000}
@@ -235,5 +267,6 @@ FoodTab.defaultProps = {
     timestamp: { seconds: null, nanoseconds: null },
     likedBy: null,
   },
+  allowDelete: false,
 };
 export { FoodTab };

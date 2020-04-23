@@ -14,7 +14,11 @@ const Feed = () => {
 
   useEffect(() => {
     setLoading(true);
-    firebase.firestore().collection("items").onSnapshot(getData);
+    firebase
+      .firestore()
+      .collection("items")
+      .orderBy("timestamp", "desc")
+      .onSnapshot(getData);
 
     return firebase
       .firestore()
@@ -28,6 +32,7 @@ const Feed = () => {
       firebase
         .firestore()
         .collection("items")
+        .orderBy("timestamp", "desc")
         .where("location", "==", cityValue.label)
         .where("type", "==", foodValue.label)
         .onSnapshot(getData);
@@ -35,16 +40,22 @@ const Feed = () => {
       firebase
         .firestore()
         .collection("items")
+        .orderBy("timestamp", "desc")
         .where("type", "==", foodValue.label)
         .onSnapshot(getData);
     } else if (cityValue.value !== 0) {
       firebase
         .firestore()
         .collection("items")
+        .orderBy("timestamp", "desc")
         .where("location", "==", cityValue.label)
         .onSnapshot(getData);
     } else {
-      firebase.firestore().collection("items").onSnapshot(getData);
+      firebase
+        .firestore()
+        .collection("items")
+        .orderBy("timestamp", "desc")
+        .onSnapshot(getData);
     }
 
     return firebase
