@@ -12,12 +12,16 @@ const MyItems = () => {
   useEffect(() => {
     setLoading(true);
     if (user) {
-      firebase.firestore().collection("items").onSnapshot(getData);
+        console.log(user.uid)
+      firebase
+        .firestore()
+        .collection("items")
+        .orderBy("timestamp", "desc")
+        .where("userUID", "==", String(user.uid))
+        .onSnapshot(getData);
       return firebase
         .firestore()
         .collection("items")
-        .where("userUID", "==", user.uid)
-        .orderBy("timestamp", "desc")
         .onSnapshot(() => {});
     }
   }, [user]);

@@ -32,7 +32,7 @@ const ForgotPassword = () => {
     firebase
       .auth()
       .sendPasswordResetEmail(email)
-      .then(() => setShowSent(true), 2000)
+      .then(() => {setShowSent(true)})
       .catch((e) => alert(e.message));
   };
 

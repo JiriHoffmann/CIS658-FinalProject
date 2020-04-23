@@ -174,7 +174,7 @@ const FoodTab = ({ item, allowDelete }) => {
         <img
           src={item.pictureURL}
           alt=""
-          className="rounded-lg rounded-bl-none rounded-br-none w-full h-48"
+          className="rounded-lg rounded-bl-none rounded-br-none object-cover w-full h-48"
         />
       </LazyLoad>
       <div className="px-4 pt-4">
