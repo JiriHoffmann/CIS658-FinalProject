@@ -160,6 +160,7 @@ const FoodTab = ({ item, allowDelete }) => {
         <Button
           loading={deleteLoading}
           enClass="absolute top-0 right-0 mr-2 mt-2"
+          disClass="absolute top-0 right-0 mr-2 mt-2"
           onClick={() => handleDelete()}
         >
           <MdDelete size="2rem" />

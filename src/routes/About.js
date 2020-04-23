@@ -34,6 +34,7 @@ const About = () => {
           <ul className="mb-12">
             <li>• React</li>
             <li>• Google Firebase</li>
+            <li>• Tailwind CSS</li>
             <li>• Font Awesome icons</li>
             <li>• Ionicons</li>
             <li>• Material Design icons</li>

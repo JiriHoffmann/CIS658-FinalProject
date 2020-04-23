@@ -12,18 +12,18 @@ const MyItems = () => {
   useEffect(() => {
     setLoading(true);
     if (user) {
-        console.log(user.uid)
+      console.log(user.uid);
       firebase
         .firestore()
         .collection("items")
         .orderBy("timestamp", "desc")
         .where("userUID", "==", String(user.uid))
         .onSnapshot(getData);
-      return firebase
-        .firestore()
-        .collection("items")
-        .onSnapshot(() => {});
     }
+    return firebase
+      .firestore()
+      .collection("items")
+      .onSnapshot(() => {});
   }, [user]);
 
   const getData = (qs) => {
