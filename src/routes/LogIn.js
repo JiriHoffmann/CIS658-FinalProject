@@ -29,7 +29,7 @@ const LogIn = ({ history }) => {
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then(() => {
-          history.push("/");
+          history.push("/user");
         })
         .catch((e) => alert(e.message));
     } catch (error) {

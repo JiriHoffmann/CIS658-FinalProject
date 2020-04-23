@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { RequiredInput, Button, Success } from "../components";
+import firebase from "../firebase";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -28,7 +29,11 @@ const ForgotPassword = () => {
       return;
     }
     setSending(true);
-    setTimeout(() => setShowSent(true), 2000);
+    firebase
+      .auth()
+      .sendPasswordResetEmail(email)
+      .then(() => setShowSent(true), 2000)
+      .catch((e) => alert(e.message));
   };
 
   return (
